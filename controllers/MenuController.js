@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const moment = require('moment');
 
 module.exports = class MenuController {
 	constructor() { 
@@ -9,6 +10,7 @@ module.exports = class MenuController {
 				message: "Please choose from an option below: ",
 				choices: [
 					"Add new contact",
+					"Print today's date",
 					"Exit"
 				]
 			}
@@ -24,6 +26,9 @@ module.exports = class MenuController {
 				case "Add new contact":
 					this.addContact();
 					break;
+				case "Print today's date":
+					this.getDate();
+					break;	
 				case "Exit":
 					this.exit();
 				default:
@@ -46,6 +51,11 @@ module.exports = class MenuController {
 		this.clear();
 		console.log('addContact called');
 		this.main();
+	}
+
+	getDate(){
+		var dateTime = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+		console.log(dateTime);
 	}
 
 	// Exit the program gracefully
