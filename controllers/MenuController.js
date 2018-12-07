@@ -62,6 +62,10 @@ module.exports = class MenuController {
 		return this.contacts.length;
 	}
 
+	remindMe(){
+		return "Learning is a life-long pursuit";
+	}
+
 	// Exit the program gracefully
 	exit(){
 		console.log("Thanks for using AddressBook!");
