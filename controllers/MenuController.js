@@ -58,6 +58,10 @@ module.exports = class MenuController {
 		console.log(dateTime);
 	}
 
+	getContactCount(){
+		return this.contacts.length;
+	}
+
 	// Exit the program gracefully
 	exit(){
 		console.log("Thanks for using AddressBook!");
