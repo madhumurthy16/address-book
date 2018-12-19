@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const ContactController = require("./ContactController");
 const moment = require('moment');
 
 module.exports = class MenuController {
@@ -15,7 +16,7 @@ module.exports = class MenuController {
 				]
 			}
 		];
-		this.contacts = [];
+		this.book = new ContactController();
 	}
 
 	//Prompt the main menu questions
@@ -49,21 +50,20 @@ module.exports = class MenuController {
 	// add an individual conatct
 	addContact(){
 		this.clear();
-		console.log('addContact called');
-		this.main();
+		inquirer.prompt(this.book.addContactQuestions).then((answers) => {
+			this.book.addContact(answers.name, answers.phone).then((contact) => {
+				console.log("Contact added successfully!");
+				this.main();
+			}).catch((err) => {
+				console.log(err);
+				this.main();
+			});
+		});
 	}
 
 	getDate(){
 		var dateTime = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 		console.log(dateTime);
-	}
-
-	getContactCount(){
-		return this.contacts.length;
-	}
-
-	remindMe(){
-		return "Learning is a life-long pursuit";
 	}
 
 	// Exit the program gracefully
